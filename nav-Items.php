@@ -22,6 +22,13 @@
                 "icon"=> "bx bxs-wallet-alt",
                 "url"=> "Payroll.php"
             ],
+          
+          
+            [
+                "caption"=> "Logout",
+                "icon"=> "bx bx-log-out",
+                "url"=> "Logout.php"
+            ],
         ];
     ?>
 <ul class="nav-links">
