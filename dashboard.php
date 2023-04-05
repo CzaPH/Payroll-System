@@ -115,7 +115,8 @@ include "nav-Items.php";
                                <td>" . $row['firstname'] . " " . $row['firstname'] . "</td>
                                <td>" . $row['schedule_id'] . "</td>
                                <td>" . $row['position_id'] . "</td>
-                                <td><i class='far fa-edit text-info h4'></i></a> | ";
+                               <td><a href = 'employee_edit_record.php?id=" . $row['id'] . "'> <i class='far fa-edit text-info h4'></i></a> | ";
+                               
               ?>
 
                             <a href="#" class="delete" data-employee_id="<?=$row['id']?>">

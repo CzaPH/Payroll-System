@@ -1,63 +1,6 @@
 <?php
 include("config/config.php");
 include "nav-Items.php";
-
-// Get employee attendance record for the day
-// if(isset($_POST['employee_id'])){
-// $employee_id = filter_var($_POST['employee_id'], FILTER_SANITIZE_NUMBER_INT);
-$employee_id = 1;
-$date = date('Y-m-d');
-$sql = "SELECT * FROM attendance WHERE employee_id = $employee_id ";
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-  // Get time in and time out
-  $row = mysqli_fetch_assoc($result);
-  $time_in = strtotime($row['time_in']);
-  $time_out = strtotime($row['time_out']);
-
-  // Calculate hours worked
-  $hours_worked = ($time_out - $time_in) / 3600;
-
-
-
-  // Check if employee is late
-  $late_penalty = 0;
-  $start_time = strtotime('8:00:00'); // assume work starts at 8 AM
-  $end_time = strtotime('17:00:00'); // assume work ends at 5 PM
-  if ($time_in > $start_time) {
-    $late_penalty = 1;
-  }
-
-  if ($time_out > $end_time) {
-    $overtime_minutes = ($time_out - $end_time) / 60;
-    $overtime_pay = $overtime_minutes * 1; // hourly rate is 60 pesos
-  }
-
-
-
-
-  // Calculate salary of late
-$late_minutes = ($time_in - $start_time) / 60;
-$late_penalty = floor($late_minutes); // Round down to nearest integer
-$salary = 360 - $late_minutes - $overtime_pay;
-
-// Calculate salary of overtime
-
-
-//   $salary = 360 - ($late_penalty * 1);
-
-} else {
-  echo "No attendance record found for employee ID $employee_id on $date.";
-}
-
-
-
-
-
-
-mysqli_close($conn);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +66,7 @@ mysqli_close($conn);
                         <thead>
                             <tr>
 
-                                <!-- <th>QR Image</th> -->
+
                                 <th>Employee id</th>
                                 <th>Date</th>
                                 <th>Time in</th>
@@ -138,14 +81,61 @@ mysqli_close($conn);
                         </thead>
                         <tbody>
                             <tr>
-                                <td><?php echo $employee_id; ?></td>
-                                <td><?php echo $date; ?></td>
-                                <td><?php echo date('h:i A', $time_in); ?></td>
-                                <td><?php echo date('h:i A', $time_out); ?></td>
-                                <td><?php echo $hours_worked; ?></td>
-                                <td><?php echo $late_penalty; ?></td>
-                                <td><?php echo $overtime_pay; ?></td>
-                                <td><?php echo $salary; ?></td>
+                                <?php
+                               
+                               $sql = "SELECT *
+                                        FROM attendance";
+                                $result = $conn->query($sql);
+
+                                
+                                if ($result->num_rows > 0) {
+                                  // output data of each row
+                                  while($row = $result->fetch_assoc()) {
+                                    $employee_id = $row['employee_id'];
+                                    $date = $row['date'];
+                                    $time_in = strtotime($row['time_in']);
+                                    $time_out = strtotime($row['time_out']);
+                                
+                                    // Calculate hours worked
+                                    $hours_worked = ($time_out - $time_in) / 3600; //Divided into 1 hour. 3,600 seconds is equivalent to 1 hour
+                                
+                                    // Check if employee is late
+                                    $late_penalty = 0;
+                                    $start_time = strtotime('8:00:00'); // assume work starts at 8 AM
+                                    $end_time = strtotime('17:00:00'); // assume work ends at 5 PM
+                                    if ($time_in > $start_time) {
+                                      $late_penalty = 1;
+                                    }
+                                
+                                    // Calculate overtime pay
+                                    $overtime_pay = 0;
+                                    if ($time_out > $end_time) {
+                                      $overtime_minutes = ($time_out - $end_time) / 60;
+                                      $overtime_pay = $overtime_minutes * 1; // deduction per minute is 1
+                                    }
+                                
+                                    // Calculate salary of late and overtime
+                                    $late_minutes = ($time_in - $start_time) / 60;
+                                    $late_penalty = floor($late_minutes); // Round down to nearest integer
+                                    $salary = 360 - floor ($late_minutes) - floor ($overtime_pay);
+                                
+                                    // output data of the current row
+                                    echo "<tr>
+                                      <td>". $employee_id . "</td>
+                                      <td>" . $date . "</td>
+                                      <td>" . $row['time_in'] . "</td>
+                                      <td>" .$row['time_out']. "</td>
+                                      <td>" .$hours_worked. "</td>
+                                      <td>" .$late_penalty. "</td>
+                                      <td>" .$overtime_pay. "</td>
+                                      <td>" .$salary. "</td>
+                                    </tr>";
+                                  }
+                                } else {
+                                  echo "No attendance record found.";
+                                }
+                                
+                                ?>
                             </tr>
                         </tbody>
 

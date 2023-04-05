@@ -12,11 +12,11 @@
                 "url"=> "attendance.php"
             ],
            
-            [
-                "caption"=> "Schedule",
-                "icon"=> "bx bx-task'",
-                "url"=> "Schedule.php"
-            ],
+            // [
+            //     "caption"=> "Schedule",
+            //     "icon"=> "bx bx-task'",
+            //     "url"=> "Schedule.php"
+            // ],
             [
                 "caption"=> "Payroll",
                 "icon"=> "bx bxs-wallet-alt",
