@@ -70,8 +70,11 @@ include "nav-Items.php";
                                 <th>#</th>
                                 <!-- <th>QR Image</th> -->
                                 <th>Employee id</th>
+                                <th>Name</th>
                                 <th>Date</th>
                                 <th>Time In</th>
+                                <th>Start Break</th>
+                                <th>End Break</th>
                                 <th>Time Out</th>
                                 <th>Tools</th>
 
@@ -80,7 +83,7 @@ include "nav-Items.php";
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * from attendance";
+                            $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id";
                             $result = $conn->query($sql);
                             $i = 1;
 
@@ -90,8 +93,11 @@ include "nav-Items.php";
                                 echo "<tr>
                                 <td>". $i ."</td>
                                 <td>". $row['employee_id'] . "</td>
+                                <td>".$row['firstname'].' '.$row['lastname']."</td>
                                 <td>" . $row['date'] . "</td>
                                 <td>" . $row['time_in'] . "</td>
+                                <td>" . $row['start_break'] . "</td>
+                                <td>" . $row['end_break'] . "</td>
                                 <td>" .$row['time_out']. "</td>
                                 
                                 <td><i class='far fa-edit text-info h4'></i></a> | ";
