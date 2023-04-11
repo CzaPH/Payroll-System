@@ -75,6 +75,7 @@ include "nav-Items.php";
                                 <th>Late Penalty</th>
                                 <th>Undertime Penalty</th>
                                 <th>Overtime</th>
+                                <th>Over break penalty</th>
                                 <th>Salary</th>
 
 
@@ -96,6 +97,7 @@ include "nav-Items.php";
                                     $date = $row['date'];
                                     $time_in = strtotime($row['time_in']);
                                     $time_out = strtotime($row['time_out']);
+                                    $end_break = strtotime($row['end_break']);
                                 
                                     // Calculate hours worked
                                     $hours_worked = ($time_out - $time_in) / 3600; //Divided into 1 hour. 3,600 seconds is equivalent to 1 hour
@@ -114,7 +116,13 @@ include "nav-Items.php";
                                       $overtime_minutes = ($time_out - $end_time) / 60;
                                       $overtime_pay = $overtime_minutes * 1; // deduction per minute is 1
                                     }
-                                   // Calculate undertime pay
+                                    //calculate overbreak
+                                    $over_break_pay = 0;
+                                    if ($end_break > strtotime('13:00:00')) { // break ends after 1 PM
+                                        $over_break_minutes = ($end_break - strtotime('13:00:00')) / 60;
+                                        $over_break_pay = $over_break_minutes * 1; // deduction per minute is 1
+                                    }
+                                                                    // Calculate undertime pay
                                     $undertime_pay = 0;
                                     if ($time_out < $end_time) {
                                     $undertime_minutes = ($end_time - $time_out) / 60;
@@ -124,7 +132,7 @@ include "nav-Items.php";
                                     // Calculate salary of late, overtime, and undertime pay
                                     $late_minutes = ($time_in - $start_time) / 60;
                                     $late_penalty = floor($late_minutes); // Round down to nearest integer
-                                    $salary = 360 - floor($late_minutes) - floor($undertime_pay);
+                                    $salary = 360 - floor($late_minutes) - floor($undertime_pay) - floor($over_break_pay);
                                     $undertime_pay_salary = -$undertime_pay; // negative value to indicate deduction
                                                                     
                                     // output data of the current row
@@ -137,7 +145,10 @@ include "nav-Items.php";
                                       <td>" .$late_penalty. "</td>
                                       <td>"  .number_format($undertime_pay, 2). "</td>
                                       <td>" .$overtime_pay. "</td>
+                                      <td>" .$over_break_pay. "</td>
                                       <td>" .$salary. "</td>
+                                      
+                                      
                                      
                                     </tr>";
                                   }
