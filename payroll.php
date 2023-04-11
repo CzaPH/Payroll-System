@@ -133,29 +133,40 @@ include "nav-Items.php";
                                     $late_penalty = floor($late_minutes); // Round down to nearest integer
                                     $salary = 360 - floor($late_minutes) - floor($undertime_pay) - floor($over_break_pay);
                                     $undertime_pay_salary = -$undertime_pay; // negative value to indicate deduction
-                                                                    
-                                    // output data of the current row
-                                    echo "<tr>
-                                    <td>".$row['firstname'].' '.$row['lastname']."</td>
-                                    <td>". $employee_id . "</td>
-                                      <td>" . $date . "</td> 
-                                      <td>" . $row['time_in'] . "</td>
-                                      <td>" .$row['time_out']. "</td>
-                                      <td>" .number_format($hours_worked, 2).  "</td>
-                                      <td>" .$late_penalty. "</td>
-                                      <td>"  .number_format($undertime_pay, 2). "</td>
-                                      <td>" .$overtime_pay. "</td>
-                                      <td>" .$over_break_pay. "</td>
-                                      <td>" .$salary. "</td>
-                                      
-                                      
-                                     
-                                    </tr>";
-                                  }
-                                } else {
-                                  echo "No attendance record found.";
-                                }
-                                
+
+                                    // // Your existing code
+                                    // $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id";
+                                    // $result = $conn->query($sql);
+                                    
+                                    // if ($result->num_rows > 0) {
+                                    //     while($row = $result->fetch_assoc()) {
+                                    //         $employee_id = $row['employee_id'];
+                                            // Calculate the salary
+                                            // $salary = 360 - floor($late_minutes) - floor($undertime_pay) - floor($over_break_pay);
+                                    
+                                            // Insert the salary into the attendance table
+                                            $insertSql = "UPDATE attendance SET salary='".$salary."' WHERE employee_id='".$row['employee_id']."' AND date='".$row['date']."'";
+                                            $conn->query($insertSql);
+                                    
+                                            // Output the row data with the calculated salary
+                                            echo "<tr>
+                                                <td>".$row['firstname'].' '.$row['lastname']."</td>
+                                                <td>". $row['employee_id'] . "</td>
+                                                <td>" . $row['date'] . "</td> 
+                                                <td>" . $row['time_in'] . "</td>
+                                                <td>" .$row['time_out']. "</td>
+                                                <td>" .number_format($hours_worked, 2).  "</td>
+                                                <td>" .$late_penalty. "</td>
+                                                <td>"  .number_format($undertime_pay, 2). "</td>
+                                                <td>" .$overtime_pay. "</td>
+                                                <td>" .$over_break_pay. "</td>
+                                                <td>" .$row['salary']. "</td>
+                                            </tr>";
+                                        }
+                                    } else {
+                                        echo "No attendance record found.";
+                                    }
+                                                             
                                 ?>
                             </tr>
                         </tbody>
