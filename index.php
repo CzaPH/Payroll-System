@@ -97,6 +97,52 @@ if (isset($_POST['time_out'])) {
         });
     </script>";
 }
+if (isset($_POST['start_break'])) {
+    $employee_id = mysqli_real_escape_string($conn, $_POST['employee_id']);
+    $start_break = date('H:i:s');
+    $logdate = date('Y-m-d');
+
+    $update = "UPDATE attendance SET start_break = '$start_break' WHERE employee_id = '$employee_id' AND date = '$logdate'";
+
+    mysqli_query($conn, $update);
+
+    echo "<script>
+        Swal.fire({
+            position: 'center',
+            title: 'Start Break!',
+            icon: 'success',
+            showCloseButton: false,
+            timer: 1500
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'index.php';
+            }
+        });
+    </script>";
+}
+if (isset($_POST['end_break'])) {
+    $employee_id = mysqli_real_escape_string($conn, $_POST['employee_id']);
+    $end_break = date('H:i:s');
+    $logdate = date('Y-m-d');
+
+    $update = "UPDATE attendance SET end_break = '$end_break' WHERE employee_id = '$employee_id' AND date = '$logdate'";
+
+    mysqli_query($conn, $update);
+
+    echo "<script>
+        Swal.fire({
+            position: 'center',
+            title: 'End Break!',
+            icon: 'success',
+            showCloseButton: false,
+            timer: 1500
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'index.php';
+            }
+        });
+    </script>";
+}
 
 ?>
 
@@ -151,7 +197,8 @@ if (isset($_POST['time_out'])) {
                 </div> -->
 
                 <input type="submit" class="btn" value="Time In" name="time_in">
-                <input type="submit" class="btn" value="Break" name="break">
+                <input type="submit" class="btn" value=" Start Break" name="start_break">
+                <input type="submit" class="btn" value="End Break" name="end_break">
                 <input type="submit" class="btn" href="timeout.php" value="Time Out" name="time_out">
                 <a href="login.php">login now</a>
                 <!-- <select>
