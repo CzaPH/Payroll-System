@@ -66,7 +66,7 @@ include "nav-Items.php";
                         <thead>
                             <tr>
 
-
+                                <th>Name</th>
                                 <th>Employee id</th>
                                 <th>Date</th>
                                 <th>Time in</th>
@@ -85,9 +85,8 @@ include "nav-Items.php";
                             <tr>
                                 <?php
                                
-                               $sql = "SELECT *
-                                        FROM attendance";
-                                $result = $conn->query($sql);
+                               $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id";
+                               $result = $conn->query($sql);
 
                                 
                                 if ($result->num_rows > 0) {
@@ -137,7 +136,8 @@ include "nav-Items.php";
                                                                     
                                     // output data of the current row
                                     echo "<tr>
-                                      <td>". $employee_id . "</td>
+                                    <td>".$row['firstname'].' '.$row['lastname']."</td>
+                                    <td>". $employee_id . "</td>
                                       <td>" . $date . "</td> 
                                       <td>" . $row['time_in'] . "</td>
                                       <td>" .$row['time_out']. "</td>
