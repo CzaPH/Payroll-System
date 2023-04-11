@@ -138,7 +138,7 @@ include "nav-Items.php";
                                     // output data of the current row
                                     echo "<tr>
                                       <td>". $employee_id . "</td>
-                                      <td>" . $date . "</td>
+                                      <td>" . $date . "</td> 
                                       <td>" . $row['time_in'] . "</td>
                                       <td>" .$row['time_out']. "</td>
                                       <td>" .number_format($hours_worked, 2).  "</td>
