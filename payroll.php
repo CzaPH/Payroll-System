@@ -73,7 +73,8 @@ include "nav-Items.php";
                                 <th>Time out</th>
                                 <th>Hours Worked</th>
                                 <th>Late Penalty</th>
-                                <th>Overtime Penalty</th>
+                                <th>Undertime Penalty</th>
+                                <th>Overtime</th>
                                 <th>Salary</th>
 
 
@@ -113,22 +114,31 @@ include "nav-Items.php";
                                       $overtime_minutes = ($time_out - $end_time) / 60;
                                       $overtime_pay = $overtime_minutes * 1; // deduction per minute is 1
                                     }
-                                
-                                    // Calculate salary of late and overtime
+                                   // Calculate undertime pay
+                                    $undertime_pay = 0;
+                                    if ($time_out < $end_time) {
+                                    $undertime_minutes = ($end_time - $time_out) / 60;
+                                    $undertime_pay = $undertime_minutes * 1; // deduction per minute is 1
+
+                                    }
+                                    // Calculate salary of late, overtime, and undertime pay
                                     $late_minutes = ($time_in - $start_time) / 60;
                                     $late_penalty = floor($late_minutes); // Round down to nearest integer
-                                    $salary = 360 - floor ($late_minutes) - floor ($overtime_pay);
-                                
+                                    $salary = 360 - floor($late_minutes) - floor($undertime_pay);
+                                    $undertime_pay_salary = -$undertime_pay; // negative value to indicate deduction
+                                                                    
                                     // output data of the current row
                                     echo "<tr>
                                       <td>". $employee_id . "</td>
                                       <td>" . $date . "</td>
                                       <td>" . $row['time_in'] . "</td>
                                       <td>" .$row['time_out']. "</td>
-                                      <td>" .$hours_worked. "</td>
+                                      <td>" .number_format($hours_worked, 2).  "</td>
                                       <td>" .$late_penalty. "</td>
+                                      <td>"  .number_format($undertime_pay, 2). "</td>
                                       <td>" .$overtime_pay. "</td>
                                       <td>" .$salary. "</td>
+                                     
                                     </tr>";
                                   }
                                 } else {
