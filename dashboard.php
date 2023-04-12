@@ -57,7 +57,6 @@ include "nav-Items.php";
     </div> -->
         <nav>
             <div class="sidebar-button">
-                <i class="bx bx-menu sidebarBtn"></i>
                 <span class="dashboard">Employee Profile</span>
             </div>
         </nav>
@@ -98,8 +97,6 @@ include "nav-Items.php";
                                 <!-- <th>QR Image</th> -->
                                 <th>Employee id</th>
                                 <th>Name</th>
-                                <th>Shift Schedule</th>
-                                <th>Position</th>
                                 <th>Tools</th>
 
 
@@ -107,7 +104,7 @@ include "nav-Items.php";
                         </thead>
                         <tbody>
                             <?php
-                           $sql = "SELECT * from employees";
+                           $sql = "SELECT * from employees;";
                            $result = $conn->query($sql);
                            $i = 1;
 
@@ -117,10 +114,10 @@ include "nav-Items.php";
                                echo "<tr>
                                <td>". $i ."</td>
                                <td>". $row['employee_id'] . "</td>
-                               <td><a href='#'>" . $row['firstname'] . " " . $row['firstname'] . "</a></td>
-                               <td>" . $row['schedule_id'] . "</td>
-                               <td>" . $row['position_id'] . "</td>
+                               <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
                                <td><a href = 'employee_edit_record.php?id=" . $row['id'] . "'> <i class='far fa-edit text-info h4'></i></a> | ";
+                               
+                               
                                
               ?>
 

@@ -52,9 +52,11 @@ include "nav-Items.php";
     </div> -->
         <nav>
             <div class="sidebar-button">
-                <i class="bx bx-menu sidebarBtn"></i>
-                <span class="dashboard">Employee Profile</span>
+                <span class="dashboard">Employee Payroll</span>
             </div>
+            <a href="payrollsummary.php">&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-eye h4">Summary</i>
+                </a>
         </nav>
 
         <div class="home-content">
@@ -85,7 +87,9 @@ include "nav-Items.php";
                             <tr>
                                 <?php
                                
-                               $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id";
+                               $sql = "SELECT * FROM attendance 
+                               INNER JOIN employees ON attendance.employee_id = employees.employee_id
+                               ORDER BY date ASC, time_in ASC, time_out ASC";
                                $result = $conn->query($sql);
 
                                 
@@ -145,7 +149,7 @@ include "nav-Items.php";
                                             // $salary = 360 - floor($late_minutes) - floor($undertime_pay) - floor($over_break_pay);
                                     
                                             // Insert the salary into the attendance table
-                                            $insertSql = "UPDATE attendance SET salary='".$salary."' WHERE employee_id='".$row['employee_id']."' AND date='".$row['date']."'";
+                                            $insertSql = "UPDATE attendance SET salary='".$salary."' WHERE employee_id='".$row['employee_id']."' AND date='".$row['date']."' ";
                                             $conn->query($insertSql);
                                     
                                             // Output the row data with the calculated salary

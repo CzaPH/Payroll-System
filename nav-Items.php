@@ -11,11 +11,11 @@
                 "icon"=> "bx bxs-user-circle",
                 "url"=> "attendance.php"
             ],
-            [
-                 "caption"=> "Payroll Summary",
-                 "icon"=> "bx bx-task'",
-                 "url"=> "payrollsummary.php"
-            ],
+            //[
+                 //"caption"=> "Payroll Summary",
+                 //"icon"=> "bx bx-task'",
+                 //"url"=> "payrollsummary.php"
+            //],
             [
                 "caption"=> "Payroll",
                 "icon"=> "bx bxs-wallet-alt",
