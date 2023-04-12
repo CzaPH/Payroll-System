@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2023 at 04:57 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Apr 12, 2023 at 09:18 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `created_on` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -51,29 +51,32 @@ INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `cre
 
 CREATE TABLE `attendance` (
   `id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
+  `employee_id` varchar(11) NOT NULL,
   `date` date NOT NULL,
   `time_in` time NOT NULL DEFAULT current_timestamp(),
   `status` int(1) NOT NULL,
   `time_out` time NOT NULL,
   `num_hr` double NOT NULL,
   `start_break` time NOT NULL,
-  `end_break` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `end_break` time NOT NULL,
+  `salary` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `attendance`
 --
 
-INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `start_break`, `end_break`) VALUES
-(106, 1, '2023-04-03', '09:05:00', 0, '17:02:00', 0, '00:00:00', '00:00:00'),
-(109, 2, '2023-04-03', '13:33:44', 0, '15:32:44', 0, '00:00:00', '00:00:00'),
-(110, 3, '2023-04-03', '15:27:59', 0, '15:38:01', 0, '00:00:00', '00:00:00'),
-(113, 4, '2023-04-03', '15:40:58', 0, '15:42:31', 0, '00:00:00', '00:00:00'),
-(115, 1, '2023-04-04', '08:47:55', 0, '14:38:29', 0, '00:00:00', '00:00:00'),
-(116, 1, '2023-04-11', '08:17:11', 0, '10:25:12', 0, '10:55:49', '10:56:35'),
-(117, 4, '2023-04-11', '09:13:41', 0, '10:25:39', 0, '00:00:00', '00:00:00'),
-(118, 2, '2023-04-11', '10:01:44', 0, '00:00:00', 0, '00:00:00', '00:00:00');
+INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `start_break`, `end_break`, `salary`) VALUES
+(263, '1', '2023-04-11', '08:05:00', 0, '16:55:00', 0, '12:00:00', '13:05:00', '345'),
+(264, '2', '2023-04-11', '08:10:00', 0, '16:00:00', 0, '12:00:00', '13:15:00', '275'),
+(265, '1', '2023-04-12', '08:23:38', 0, '16:45:00', 0, '12:00:00', '13:05:00', '317'),
+(266, '2', '2023-04-16', '09:00:00', 0, '16:00:00', 0, '12:00:00', '13:00:00', '240'),
+(267, '3', '2023-04-22', '09:00:00', 0, '15:00:00', 0, '12:00:00', '13:20:00', '160'),
+(268, '3', '2023-04-12', '08:00:00', 0, '16:40:00', 0, '12:00:00', '13:00:00', '340'),
+(269, '2', '2023-04-12', '08:00:00', 0, '17:00:00', 0, '12:00:00', '13:00:00', '360'),
+(270, '3', '2023-04-11', '08:00:00', 0, '17:00:00', 0, '12:00:00', '13:05:00', '355'),
+(272, '1', '2023-04-16', '09:00:00', 0, '16:35:00', 0, '12:00:00', '13:00:00', '275'),
+(273, '3', '2023-04-16', '08:00:00', 0, '17:00:00', 0, '12:00:00', '13:10:00', '350');
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,7 @@ CREATE TABLE `employees` (
   `position_id` int(11) NOT NULL,
   `schedule_id` int(11) NOT NULL,
   `created_on` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `employees`
@@ -98,8 +101,7 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `position_id`, `schedule_id`, `created_on`) VALUES
 (5, '1', 'Czarina Joy', 'Evangelista', 1, 1, '0000-00-00'),
 (6, '2', 'Jerron', 'Urbanozo', 1, 1, '2023-04-03'),
-(8, '3', 'Lance', 'Zalamea', 0, 0, '2023-04-03'),
-(9, '4', 'Nicole', 'Taberna', 1, 1, '2023-04-03');
+(8, '3', 'Lance', 'Zalamea', 0, 0, '2023-04-03');
 
 --
 -- Indexes for dumped tables
@@ -137,7 +139,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
 
 --
 -- AUTO_INCREMENT for table `employees`
