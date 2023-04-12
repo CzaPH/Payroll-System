@@ -156,7 +156,7 @@ include "nav-Items.php";
                                                 <td>" . $row['time_in'] . "</td>
                                                 <td>" .$row['time_out']. "</td>
                                                 <td>" .number_format($hours_worked, 2).  "</td>
-                                                <td>" .$late_penalty. "</td>
+                                                <td>"  .number_format($late_penalty, 2). "</td>
                                                 <td>"  .number_format($undertime_pay, 2). "</td>
                                                 <td>" .$overtime_pay. "</td>
                                                 <td>" .$over_break_pay. "</td>

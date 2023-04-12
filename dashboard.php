@@ -112,7 +112,7 @@ include "nav-Items.php";
                                echo "<tr>
                                <td>". $i ."</td>
                                <td>". $row['employee_id'] . "</td>
-                               <td><a href='#'>" . $row['firstname'] . " " . $row['firstname'] . "</a></td>
+                               <td><a href='#'>" . $row['firstname'] . " " . $row['lastname'] . "</a></td>
                                <td>" . $row['schedule_id'] . "</td>
                                <td>" . $row['position_id'] . "</td>
                                <td><a href = 'employee_edit_record.php?id=" . $row['id'] . "'> <i class='far fa-edit text-info h4'></i></a> | ";
