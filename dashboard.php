@@ -38,6 +38,11 @@ include "nav-Items.php";
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
+    <script>
+    $(document).ready(function() {
+        $('#dataTable_1').DataTable();
+    });
+    </script>
 
 <body>
     <div class="sidebar">
@@ -112,7 +117,7 @@ include "nav-Items.php";
                                echo "<tr>
                                <td>". $i ."</td>
                                <td>". $row['employee_id'] . "</td>
-                               <td><a href='#'>" . $row['firstname'] . " " . $row['lastname'] . "</a></td>
+                               <td><a href='#'>" . $row['firstname'] . " " . $row['firstname'] . "</a></td>
                                <td>" . $row['schedule_id'] . "</td>
                                <td>" . $row['position_id'] . "</td>
                                <td><a href = 'employee_edit_record.php?id=" . $row['id'] . "'> <i class='far fa-edit text-info h4'></i></a> | ";
@@ -178,6 +183,7 @@ include "nav-Items.php";
                 });
             });
             </script>
+
 </body>
 
 </html>

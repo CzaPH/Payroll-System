@@ -39,6 +39,12 @@ include "nav-Items.php";
 
     </head>
 
+    <script>
+    $(document).ready(function() {
+        $('#dataTable_1').DataTable();
+    });
+    </script>
+
 <body>
     <div class="sidebar">
         <div class="logo-details">
