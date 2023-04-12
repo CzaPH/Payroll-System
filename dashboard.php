@@ -112,12 +112,11 @@ include "nav-Items.php";
                                echo "<tr>
                                <td>". $i ."</td>
                                <td>". $row['employee_id'] . "</td>
-                               <td><a href='#'>" . $row['firstname'] . " " . $row['firstname'] . "</a></td>
-                               <td>" . $row['schedule_id'] . "</td>
-                               <td>" . $row['position_id'] . "</td>
-                               <td><a href = 'employee_edit_record.php?id=" . $row['id'] . "'> <i class='far fa-edit text-info h4'></i></a> | ";
-                               
-              ?>
+                               <td><a href= '#'>". $row['firstname'] . " " . $row['lastname'] ." </a></td>
+                            <td>" . $row['schedule_id'] . "</td>
+                            <td>" . $row['position_id'] . "</td>
+                            <td><a href='employee_edit_record.php?id=" . $row['id']
+                                    . "'> <i class='far fa-edit text-info h4'></i></a> | " ; ?>
 
                             <a href="#" class="delete" data-employee_id="<?=$row['id']?>">
                                 <i class="far fa-trash-alt text-danger h4"></i>
@@ -178,6 +177,7 @@ include "nav-Items.php";
                 });
             });
             </script>
+
 </body>
 
 </html>
