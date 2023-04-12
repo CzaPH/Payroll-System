@@ -38,6 +38,11 @@ include "nav-Items.php";
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
+    <script>
+    $(document).ready(function() {
+        $('#dataTable_1').DataTable();
+    });
+    </script>
 
 <body>
     <div class="sidebar">
