@@ -58,7 +58,6 @@ include "nav-Items.php";
     </div> -->
         <nav>
             <div class="sidebar-button">
-                <i class="bx bx-menu sidebarBtn"></i>
                 <span class="dashboard">Employee Attendance</span>
             </div>
         </nav>
@@ -89,7 +88,8 @@ include "nav-Items.php";
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id";
+                            $sql = "SELECT * FROM attendance INNER JOIN employees ON attendance.employee_id = employees.employee_id
+                            ORDER BY date ASC, time_in ASC, time_out ASC";
                             $result = $conn->query($sql);
                             $i = 1;
 

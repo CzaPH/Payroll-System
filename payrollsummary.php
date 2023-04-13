@@ -68,7 +68,10 @@ include "nav-Items.php";
 					<tr>
 						<th>Employee ID</th>
 						<th>Name</th>
-						<th>Salary</th>
+                        <th>Days of Work</th>
+                        <th>Gross Pay</th>
+                        <th>Deduction</th>
+						<th>Net Salary</th>
 					</tr>
 				</thead>
 				<tbody>

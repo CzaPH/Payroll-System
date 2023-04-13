@@ -3,7 +3,7 @@
 	if(ISSET($_POST['search'])){
 		$date1 = date("Y-m-d", strtotime($_POST['date1']));
 		$date2 = date("Y-m-d", strtotime($_POST['date2']));
-		$query=mysqli_query($conn, "SELECT *,SUM(salary) as TotalSalary
+		$query=mysqli_query($conn, "SELECT *,SUM(salary) as TotalSalary, COUNT(salary) AS DaysofWork
 		FROM `attendance` 
         INNER JOIN employees ON attendance.employee_id = employees.employee_id
         WHERE date(`date`) 
@@ -15,7 +15,9 @@
 ?>
 	<tr>
 		<td><?php echo $fetch['employee_id']?></td>
-		<td><?php echo $fetch['firstname']?></td>
+		<td><?php echo $fetch['firstname'] ?> <?php echo $fetch['lastname'] ?></td>
+		<td><?php echo $fetch['DaysofWork']?></td>
+		<td></td>
 		<td><?php echo $fetch['TotalSalary']?></td>
 	</tr>
 <?php
@@ -27,7 +29,7 @@
 			</tr>';
 		}
 	}else{
-		$query=mysqli_query($conn, "SELECT * ,SUM(salary) as TotalSalary 
+		$query=mysqli_query($conn, "SELECT * ,SUM(salary) as TotalSalary, COUNT(salary) AS DaysofWork 
 		FROM `attendance` 
 		INNER JOIN employees ON attendance.employee_id = employees.employee_id 
 		GROUP BY attendance.employee_id") or die(mysqli_error());
@@ -36,6 +38,8 @@
 	<tr>
 		<td><?php echo $fetch['employee_id']?></td>
 		<td><?php echo $fetch['firstname'] ?> <?php echo $fetch['lastname'] ?></td>
+		<td><?php echo $fetch['DaysofWork']?></td>
+		<td></td>
 		<td><?php echo $fetch['TotalSalary']?></td>
 	</tr>
 <?php

@@ -86,7 +86,7 @@ include "nav-Items.php";
                             <input type="text" class="form-control" id="Position" name="position"
                                 placeholder="Position">
                         </div>
-                        <button type="submit" name="Add" class="btn btn-primary mb-2">Add Record</button>
+                        <button type="submit" name="Add" class="btn btn-primary mb-2">Add Employee</button>
                     </form>
 
 
@@ -94,7 +94,6 @@ include "nav-Items.php";
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <!-- <th>QR Image</th> -->
                                 <th>Employee id</th>
                                 <th>Name</th>
                                 <th>Tools</th>
